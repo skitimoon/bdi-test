@@ -1,5 +1,4 @@
-name: pytest
-
+name: Run pytest
 on:
   pull_request:
     branches: [ "main" ]
@@ -10,15 +9,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v5.0.0
+
     - name: Setup Python
       uses: actions/setup-python@v6.0.0
       with:
         python-version-file: ".python-version"
+
     - name: Install uv
       uses: astral-sh/setup-uv@v7.1.0
+
     - name: Install dependencies
       run: |
         uv sync --locked
+
     - name: Test with pytest
       run: |
         uv run pytest tests
